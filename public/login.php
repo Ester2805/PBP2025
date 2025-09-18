@@ -1,0 +1,35 @@
+<?php
+// login.php
+session_start();
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $username = $_POST["username"] ?? "";
+    $password = $_POST["password"] ?? "";
+
+    // contoh login hardcode dulu
+    if ($username === "admin" && $password === "1234") {
+        $_SESSION["user"] = $username;
+        header("Location: index.php");
+        exit;
+    } else {
+        $error = "Username atau password salah!";
+    }
+}
+?>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Login - PBP2025</title>
+</head>
+<body>
+    <h2>Login</h2>
+    <?php if (!empty($error)) echo "<p style='color:red;'>$error</p>"; ?>
+    <form method="POST">
+        <label>Username:</label><br>
+        <input type="text" name="username"><br><br>
+        <label>Password:</label><br>
+        <input type="password" name="password"><br><br>
+        <button type="submit">Login</button>
+    </form>
+</body>
+</html>
